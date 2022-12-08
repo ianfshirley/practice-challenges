@@ -65,6 +65,7 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
+  return Object.entries(obj).map(idx => idx.join(': '));
 };
 
 
@@ -121,7 +122,9 @@ const characters = [
 const getHouses = (arr) => {
   let houses = [];
   // Solution code here...
+  arr.forEach(value => houses.push(value.house));
   return houses;
+  // return arr.map(val => val.house);
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -138,7 +141,29 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
+  // let kids = 0;
+  // arr.forEach(person => {
+  //   //find person whose name matches character passed in
+  //   if (person.name === character) {
+  //     // find children array - find the index of the character array
+  //     Object.keys(person).forEach((key, idx) => {
+  //       if (key === 'children') {
+  //         // if I find children, then idx will equal the children index
+  //         let values = Object.values(person);
+  //         // length of children array, assign that length to kids
+  //         kids = values[idx].length;
+  //       }
+  //     });
+  //   }
+  // });
+  // return kids ? true : false;
 
+  let regex = /(?:children)/g;
+  let hasKids = false;
+  arr.forEach(person => {
+    person.name === character ? hasKids = regex.test(Object.keys(person)) : false;
+  });
+  return hasKids;
 };
 
 /* ------------------------------------------------------------------------------------------------
